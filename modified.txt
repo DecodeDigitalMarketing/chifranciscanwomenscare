@@ -1,0 +1,2 @@
+The hotfix files were copied into the target directory with the '.new' extension. Merge your custom changes into these files and remove the '.new' extensions afterwards.
+C:\lsm\bluespire\chifranciscanwomenscare.org\CMS\CMSMasterPages\UI\SimplePage.master

@@ -1,0 +1,31 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)_$(Build.SourceBranchName)
+
+pool:
+  name: Default
+
+trigger:
+- master
+- feature/*
+- develop
+
+steps:
+- task: DeleteFiles@1
+  displayName: 'Delete files from CMS'
+  inputs:
+    SourceFolder: CMS
+    Contents: robots.txt
+
+- task: ArchiveFiles@2
+  displayName: 'Archive CMS'
+  inputs:
+    rootFolderOrFile: 'CMS'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/cms.$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'
